@@ -1,4 +1,4 @@
-# run the kiwi sample in stand alone
+# run the kiwi sample in stand alone requires coco install and mask install
 python kiwi_rail.py
 
 #test
