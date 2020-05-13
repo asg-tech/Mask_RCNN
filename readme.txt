@@ -23,3 +23,5 @@ master -> |
            training -> |
                        melika # write code here
                        then stage, message, commit, push
+
+when you push to git hub it opens a pull request?
