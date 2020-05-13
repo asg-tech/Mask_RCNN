@@ -3,6 +3,9 @@ python kiwi_rail.py
 
 #test
 
+# test 2 on training branch
+
+
 #how to branch
 
 # create a branch called training from master
@@ -23,3 +26,4 @@ master -> |
            training -> |
                        melika # write code here
                        then stage, message, commit, push
+
