@@ -22,8 +22,14 @@ git checkout training
 # create a branch called melika from training branch
 git checkout -b melika training
 
+# push branch to github
+git push origin training
+
+# when you push on melika branch it will show up on github!
+
 master -> |
            training -> |
                        melika # write code here
                        then stage, message, commit, push
+
 
