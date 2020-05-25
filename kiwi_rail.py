@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 
+# this is a re write of existing code for KAN
+# modifyed to run model and weights directly
+
 # change this to make each class were interested in a specific color
 # ie cows near track is red, cow not near track is orange etc
 
