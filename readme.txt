@@ -3,6 +3,9 @@ python kiwi_rail.py
 
 #test
 
+# test 2 on training branch
+
+
 #how to branch
 
 # create a branch called training from master
@@ -29,4 +32,4 @@ master -> |
                        melika # write code here
                        then stage, message, commit, push
 
-when you push to git hub it opens a pull request?
+
