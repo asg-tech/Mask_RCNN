@@ -8,9 +8,10 @@ if(len(args) < 2):
     print("run command: python video_demo.py 0 or video file name")
     sys.exit(0)
 
-name = int(args[1])
-if(len(args[1]) == 1):
+if(args[1].isdigit()):
     name = int(args[1])
+else:
+    name = args[1]
 
 stream = cv2.VideoCapture(name)
 
