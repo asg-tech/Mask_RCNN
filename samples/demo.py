@@ -17,6 +17,7 @@ import skimage.io
 import matplotlib
 import matplotlib.pyplot as plt
 #from tensorflow import keras
+import time
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
@@ -36,7 +37,7 @@ print("root dir ", ROOT_DIR)
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 print("after model dir ",MODEL_DIR)
 # Local path to trained weights file
-COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
+COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco_2.h5")
 print("coco path ", COCO_MODEL_PATH)
 # Download COCO trained weights from Releases if needed
 if not os.path.exists(COCO_MODEL_PATH):
@@ -130,11 +131,14 @@ image = skimage.io.imread(os.path.join(IMAGE_DIR, random.choice(file_names)))
 
 # Run detection
 results = model.detect([image], verbose=1)
-
+start = time.time()
 # Visualize results
 r = results[0]
 visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                             class_names, r['scores'])
+
+end = (time.time() - start)
+print("inference time {} ".format(end))
 
 
 # In[ ]:

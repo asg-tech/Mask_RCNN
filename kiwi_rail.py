@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 # this is a re write of existing code for KAN
 # modifyed to run model and weights directly
@@ -17,7 +18,7 @@ def random_colors(N):
 
 # apply mask to image passed in
 
-def apply_mask(image, mask, color, aplha=0.5):
+def apply_mask(image, mask, color, alpha=0.5):
     # apply the mask to the image, loop over the RGB colors
     for n, c in enumerate(color):
         # if the x,y location is in a mask apply the color and alpha channels
@@ -66,9 +67,9 @@ def display_instances(image, boxes, masks, ids, names, scores):
         # create a label for the bbox, label and confidence
         caption = '{} {:.2f}'.format(label, score) if score else label
         # add a label to the image in the top left corner of the bounding box
-        # image, the text, starting loc for text, the font used alpha, color of box, stroke
+        # image, the text, starting loc for text, the font used, alpha, color of box, stroke
         image = cv2.putText(
-            image, caption, (x1, y1), cv2.FONT_HERSHET_COMPEX, 0.7, color, 2
+            image, caption, (x1, y1), cv2.FONT_HERSHEY_COMPLEX, 0.7, color, 2
         )
     # return the image to the caller
     return image
@@ -92,7 +93,7 @@ if __name__ == '__main__':
 # get location of weights file
     ROOT_DIR =os.getcwd()
     MODEL_DIR = os.path.join(ROOT_DIR, "logs")
-    COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
+    COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco_2.h5")
     # download if not found
     if not os.path.exists(COCO_MODEL_PATH):
         utils.download_trained_weights(COCO_MODEL_PATH)
@@ -140,9 +141,13 @@ capture = cv2.VideoCapture(0)
 capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
+started = time.time()
+each = time.time()
+
 # while loop
 
 while True:
+    each = time.time()
     ret, frame = capture.read()
     results = model.detect([frame], verbose=0)
     # get the first thing in the results array
@@ -150,7 +155,7 @@ while True:
 
     # get the image overlayed with the mask
     frame = display_instances(
-        frame, r['rois'], r['maks'], r['class_ids'], class_names, r['scores']
+        frame, r['rois'], r['masks'], r['class_ids'], class_names, r['scores']
     )
 
     # display the image to screen
@@ -159,6 +164,9 @@ while True:
     # exit on q key
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+    end = (each - time.time())
+    print("loop time: {} ".format(end))
 
 # clean up after quit
 capture.release()
