@@ -17,7 +17,7 @@ def random_colors(N):
 
 # apply mask to image passed in
 
-def apply_mask(image, mask, color, aplha=0.5):
+def apply_mask(image, mask, color, alpha=0.5):
     # apply the mask to the image, loop over the RGB colors
     for n, c in enumerate(color):
         # if the x,y location is in a mask apply the color and alpha channels
