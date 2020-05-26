@@ -150,7 +150,7 @@ while True:
 
     # get the image overlayed with the mask
     frame = display_instances(
-        frame, r['rois'], r['maks'], r['class_ids'], class_names, r['scores']
+        frame, r['rois'], r['masks'], r['class_ids'], class_names, r['scores']
     )
 
     # display the image to screen
